@@ -3,9 +3,9 @@ import "./App.css";
 import Cards from "./Cards";
 import { timeout } from "./utils";
 import { allSounds } from "./utils";
-
+import GameOver from "./gameOver";
 function App() {
-  const colorList = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  const colorList = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
   const initPlay = {
     isDisplay: false,
     displayPattern: [],
@@ -16,15 +16,22 @@ function App() {
   const [isOn, setIsOn] = useState(false);
   const [game, setGame] = useState(initPlay);
   const [flashColor, setFlashColor] = useState("");
-  // USER CLICKS START
+  const [isGameOver, setIsGameOver] = useState(false);
+  // USER CLICKS START OR REPLAY
   function startHandle() {
     setIsOn(true);
+  }
+  function restartGame() {
+    setIsGameOver(false);
+    setGame(initPlay);
+    setIsOn(false);
   }
   // play.isOn changed. Change isDisplay.
   useEffect(() => {
     if (isOn) {
       setGame({ ...initPlay, isDisplay: true });
     }
+    // eslint-disable-next-line
   }, [isOn]);
 
   // isDisplay is true. Add a color to display pattern.
@@ -35,6 +42,7 @@ function App() {
       copyColors.push(newColor);
       setGame({ ...game, displayPattern: copyColors });
     }
+    // eslint-disable-next-line
   }, [isOn, game.isDisplay]);
 
   // display all colors from pattern
@@ -42,6 +50,7 @@ function App() {
     if (isOn && game.isDisplay && game.displayPattern.length) {
       displayColors();
     }
+    // eslint-disable-next-line
   }, [isOn, game.isDisplay, game.displayPattern.length]);
 
   async function displayColors() {
@@ -87,7 +96,11 @@ function App() {
         }
       } else {
         await timeout(0.5);
-        setGame({ ...initPlay, score: game.displayPattern.length });
+        setGame({
+          ...initPlay,
+          score: game.displayPattern.length,
+        });
+        setIsGameOver(true);
       }
       await timeout(0.1);
       setFlashColor("");
@@ -111,15 +124,17 @@ function App() {
               color={v}
             />
           ))}
+        {!isOn && !game.score && (
+          <div className="btn" onClick={startHandle}>
+            Start
+          </div>
+        )}
+        {isOn && (game.isDisplay || game.isUserPlay) && (
+          <div className="btn">{game.score}</div>
+        )}
       </div>
-      {!isOn && !game.score && (
-        <button className="btn" onClick={startHandle}>
-          Start
-        </button>
-      )}
-      {isOn && (game.isDisplay || game.isUserPlay) && (
-        <div className="btn">{game.score}</div>
-      )}
+
+      {isGameOver && <GameOver score={game.score} reset={restartGame} />}
     </div>
   );
 }
