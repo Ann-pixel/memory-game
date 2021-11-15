@@ -113,6 +113,10 @@ function App() {
   }
   return (
     <div className="app">
+      <div className="header">
+        <div className="">Test your memory!</div>
+        <div className="">----Hit START----</div>
+      </div>
       <div className="card-wrapper">
         {colorList &&
           colorList.map((v, i) => (
@@ -136,6 +140,7 @@ function App() {
       </div>
 
       {isGameOver && <GameOver score={game.score} reset={restartGame} />}
+      <div className="footer">Made with ♥ by Gauri</div>
     </div>
   );
 }

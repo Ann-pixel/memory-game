@@ -6,7 +6,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(223, 216, 216);
+  background-color: rgb(199, 207, 207);
+}
+
+.header {
+  text-align: center;
+  font-size: 60px;
+  margin-bottom: 50px;
+  margin-top: 40px;
 }
 
 .card-wrapper {
@@ -34,4 +41,10 @@ body {
 
 .btn:hover {
   filter: opacity(.7)
+}
+
+.footer {
+  text-align: center;
+  font-size: 30px;
+  margin: 50px
 }
