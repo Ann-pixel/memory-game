@@ -6,10 +6,12 @@ import eS from "./sounds/e.mp3";
 import fS from "./sounds/f.mp3";
 import gS from "./sounds/g.mp3";
 import hS from "./sounds/h.mp3";
+import whale from "./sounds/whale.mp3";
 
 export function timeout(s) {
   return new Promise((resolve) => setTimeout(resolve, s * 1000));
 }
+export const whaleSound = new Audio(whale);
 
 const a = new Audio(aS);
 const b = new Audio(bS);

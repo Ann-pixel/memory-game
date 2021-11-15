@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Cards from "./Cards";
 import { timeout } from "./utils";
-import { allSounds } from "./utils";
+import { allSounds, whaleSound } from "./utils";
 import GameOver from "./gameOver";
 function App() {
-  const colorList = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+  const colorList = ["a", "b", "c", "d", "e", "f", "g", "h"];
   const initPlay = {
     isDisplay: false,
     displayPattern: [],
@@ -100,6 +100,7 @@ function App() {
           ...initPlay,
           score: game.displayPattern.length,
         });
+        whaleSound.play();
         setIsGameOver(true);
       }
       await timeout(0.1);

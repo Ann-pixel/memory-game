@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Gudea&display=swap');
+
+/* font-family: 'Gudea', sans-serif; */
 body {
+  font-family: 'Chewy', cursive;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +13,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-
+  border: 4px solid #001219;
+  padding: 4px;
 
 }
 
